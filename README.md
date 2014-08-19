@@ -8,7 +8,7 @@ A date and time picker for all the html input elements that are related to the d
 - datetime
 - month
 - week
-- 
+
 Dependencies
 - jquery
 - jquery-ui: datepicker and slider widget
