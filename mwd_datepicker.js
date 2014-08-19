@@ -1,4 +1,6 @@
-
+/*mwd_datepicker - v1.0 beta
+* http://www.mwd-form-elements.com/datetime/#!/getting-started/download/mwd_datepicker
+* Copyright (c) 2014 Marja Menge, Menge Webdesign, MIT License */
 (function ($) {
 
 	/*Do not redefine mwd_datepicker */
