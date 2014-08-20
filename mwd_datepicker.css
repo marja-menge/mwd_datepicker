@@ -2,20 +2,35 @@
 // Your original input which holds your original id
 // It is not send with the form and is merely there because the ui-datepicker needs an input to initiate on with a pure date format
 // The width of this input is 1px and will remain that way, but by adjusting height you can influence the vertical position of the ui-datepicker
-.mwd_datepicker_input { float: left; height: 21px; }
+.mwd_datepicker_input { 
+  float: left;
+  height: 21px;
+}
 
 // mwd_datepicker input 
 // The class .mwd_datepicker is given to the wrapper around the 3 input elements that are actually beeing send on submit
 // The only visible input in this wrapper is .mwd_datepicker_value which holds the value you see on screen
 // With this css you can adjust the looks of your visible input
 // By adjusting width, float and margins you can influence the horizontal position of the ui-datepicker
-.mwd_datepicker { float: left; width: 200px; margin: 0 0 0 3px; }
-.mwd_datepicker .mwd_datepicker_value { float: right; height: 20px; width: 200px; padding: 0 0 0 3px; }
+.mwd_datepicker { 
+  float: left;
+  width: 200px;
+  margin: 0 0 0 3px;
+}
+.mwd_datepicker .mwd_datepicker_value { 
+  float: right;
+  height: 20px;
+  width: 200px;
+  padding: 0 0 0 3px;
+}
 
 // ui-datepicker default width height 
 // This is a hidden div which holds the inital width and height of the ui-datepicker
 // It is necessary to preserve these values because height and width of the time- and monthpickers are calculated on base of that
-.mwd-ui-datepicker { width: 250px; height: 230px; }
+.mwd-ui-datepicker { 
+  width: 250px;
+  height: 230px;
+}
 
 // ui-datepicker style a bit nicer 
 .ui-datepicker { font: normal 11px verdana, futura, arial, helvetica; line-height: 20px; }
