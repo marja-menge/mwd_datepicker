@@ -59,7 +59,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-label { float: left; width: 100px; margin: 0 5px 5px 0; padding: 0 0 0 5px; 
+fieldset { display:block; border: 1px solid #666666; padding: 10px; margin: 0 0 10px 0; clear: both; }
+fieldset label { float: left; width: 100px; margin: 0 5px 5px 0; padding: 0 0 0 5px; 
 display: block; height: 20px; line-height: 20px; }
 fieldset br { clear: both; }
 
