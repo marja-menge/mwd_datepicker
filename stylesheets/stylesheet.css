@@ -118,6 +118,9 @@ a {
   -ms-transition: text-shadow 0.5s ease;
 }
 
+label { float: left; width: 200px; margin: 0 5px 5px 0; padding: 0 0 0 5px; 
+display: block; height: 20px; line-height: 20px;
+
 a:hover, a:focus {text-decoration: underline;}
 
 footer a {
