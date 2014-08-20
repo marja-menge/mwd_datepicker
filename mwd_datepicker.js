@@ -464,23 +464,23 @@
 				
 		_addClearBtn: function(input) {  
 			var required = $(input).attr('required'),
-			clearbtn = $(input).datepicker('option', 'clearBtn');
-			if(!required && clearbtn == true) { 
-				var buttonPane = $(input).datepicker('widget').find('.ui-datepicker-buttonpane');
-				var thisid = $(input).attr('id'),
-				btntxt = $(input).datepicker('option', 'clearBtnText'),
-				placeholder = $(input).attr('placeholder'),
-				btn = $('<button class="ui-datepicker-clear ui-state-default ui-priority-secondary ui-corner-all" type="button">' + btntxt + '</button>')			
-				.unbind('click')
-				.bind('click', function () { 
-					$.datepicker._clearDate(input); 
-					$('#mwd_date_' + thisid).val(''); 
-					$('#mwd_date_hidden_' + thisid).val(''); 			
-					$('#mwd_time_hidden_' + thisid).val(''); 					
-					if (placeholder) { $('#mwd_placeholder_' + thisid).html(placeholder); }
-				})
-				.appendTo(buttonPane); 
-			}	
+			clearbtn = $(input).datepicker('option', 'clearBtn'),
+			buttondisplay = '';
+			if(required || clearbtn == false) { buttondisplay = 'display: none;'; }
+			var buttonPane = $(input).datepicker('widget').find('.ui-datepicker-buttonpane');
+			var thisid = $(input).attr('id'),
+			btntxt = $(input).datepicker('option', 'clearBtnText'),
+			placeholder = $(input).attr('placeholder'),
+			btn = $('<button class="ui-datepicker-clear ui-state-default ui-priority-secondary ui-corner-all" type="button" style="' + buttondisplay + '">' + btntxt + '</button>')			
+			.unbind('click')
+			.bind('click', function () { 
+				$.datepicker._clearDate(input); 
+				$('#mwd_date_' + thisid).val(''); 
+				$('#mwd_date_hidden_' + thisid).val(''); 			
+				$('#mwd_time_hidden_' + thisid).val(''); 					
+				if (placeholder) { $('#mwd_placeholder_' + thisid).html(placeholder); }
+			})
+			.appendTo(buttonPane); 	
 		},
 		
 		_addTimepicker: function(input, dp_inst) {		
