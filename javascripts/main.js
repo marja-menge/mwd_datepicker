@@ -4,7 +4,7 @@ $( document ).ready(function() {
   
 	$('input[type=time]').mwd_timepicker();
 	
-	$('input.timezone[type=time]').mwd_timepicker('destroy').mwd_timepicker({
+	$('.timezone').mwd_timepicker('destroy').mwd_timepicker({
 		showTimezone: true
 	});	
 	
