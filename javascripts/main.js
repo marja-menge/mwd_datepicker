@@ -3,7 +3,8 @@ $( document ).ready(function() {
   $('input[type=date]').mwd_datepicker();
   
 	$('input[type=time]').mwd_timepicker();
-	$('input.timezone[type=time]').mwd_timepicker({
+	
+	$('input.timezone[type=time]').mwd_timepicker('destroy').mwd_timepicker({
 		showTimezone: true
 	});	
 	
