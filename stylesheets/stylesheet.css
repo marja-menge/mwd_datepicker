@@ -28,7 +28,7 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
-
+body, html { font: normal 11px verdana, futura, arial, helvetica; }
 label { float: left; width: 200px; margin: 0 5px 5px 0; padding: 0 0 0 5px; 
 display: block; height: 20px; line-height: 20px; }
 
