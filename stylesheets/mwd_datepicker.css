@@ -18,7 +18,7 @@ It is necessary to preserve these values because height and width of the time- a
 .mwd-ui-datepicker { width: 250px; height: 230px; }
 
 /* ui-datepicker style a bit nicer */
-.ui-datepicker { font: normal 11px verdana, futura, arial, helvetica; }
+.ui-datepicker { font: normal 11px verdana, futura, arial, helvetica; line-height: 20px; }
 .ui-datepicker-calendar a.ui-state-default { padding: 0 10px 0 0; }
 .ui-datepicker-row-break { font-size: 100%; }
 .ui-datepicker thead th { padding: 2px 0; }
