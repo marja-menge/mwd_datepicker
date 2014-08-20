@@ -19,9 +19,11 @@ It is necessary to preserve these values because height and width of the time- a
 
 /* ui-datepicker style a bit nicer */
 .ui-datepicker { font: normal 11px verdana, futura, arial, helvetica; line-height: 20px; }
+
+.ui-datepicker table {  border: 0; margin-bottom: 0; }
 .ui-datepicker-calendar a.ui-state-default { padding: 0 10px 0 0; }
 .ui-datepicker-row-break { font-size: 100%; }
-.ui-datepicker thead th { padding: 2px 0; }
+.ui-datepicker thead th { padding: 2px 0; background: transparent; }
 .ui-datepicker-buttonpane { position: absolute; bottom: 0; }
 .ui-datepicker-buttonpane button.ui-state-default { padding: 0 5px; height: 18px; line-height: 14px; float: left; }
 .ui-datepicker-buttonpane button.ui-datepicker-close { float: right; }
