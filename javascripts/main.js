@@ -1,1 +1,1 @@
-console.log('This would be the main JS file.');
+$('input[type=date]').mwd_datepicker();
