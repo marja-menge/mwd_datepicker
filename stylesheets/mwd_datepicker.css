@@ -47,7 +47,7 @@ font-size: 11px; font-weight: bold; width: 45px; margin: 1px 3px 0 0; }
 .mwd-ui-datetimepicker .time_slider_btn-zl { width: 122px; }
 .mwd-ui-datetimepicker .time_slider_max_btn { margin: 2px 0 0 0; }
 .mwd-ui-datetimepicker .time_slider_btn span { margin: 0 auto; }
-.mwd-ui-datetimepicker .time_slider_time { position: relative; width: 0; height: 0; overflow: visible; color: #999999; font-size: 10px; left: 50%;
+.mwd-ui-datetimepicker .time_slider_time { font-family: arial, verdana, futura, helvetica; position: relative; width: 0; height: 0; overflow: visible; color: #999999; font-size: 10px; left: 50%;
 margin: 10px 0 2px -33px; }
 .mwd-ui-datetimepicker .time_slider_maxtime { margin-top: -18px; margin-bottom: 30px; }
 .mwd-ui-datetimepicker .time_slider { margin: 0 auto; height: 132px; }
@@ -58,5 +58,5 @@ margin: 10px 0 2px -33px; }
 .mwd-ui-timepicker .time_slider_btn { float: left; width: 16px; height: 30px; cursor: pointer;  }
 .mwd-ui-timepicker .time_slider_btn span { margin-top: 6px; }
 .mwd-ui-timepicker .time_slider { float: left; width: 181px; margin: 10px 15px 0 15px; }
-.mwd-ui-timepicker .time_slider_time { width: auto; color: #999999; font-size: 10px;  float: left; margin: -27px 0 0 36px; }
+.mwd-ui-timepicker .time_slider_time { font-family: arial, verdana, futura, helvetica; width: auto; color: #999999; font-size: 10px;  float: left; margin: -27px 0 0 36px; }
 .mwd-ui-timepicker .time_slider_maxtime { float: right; margin: -27px 36px 0 0; }
