@@ -16,4 +16,4 @@ Dependencies
 
 Documentation: http://www.mwd-form-elements.com/datetime/#!/getting-started/download/mwd_datepicker
 
-Version 1.0 beta / tested in FF latets
+Version 1.1 beta
