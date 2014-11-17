@@ -1,6 +1,20 @@
-/*mwd_datepicker - v1.0 beta
+/*mwd_datepicker - v1.1 beta
 * http://www.mwd-form-elements.com/datetime/#!/getting-started/download/mwd_datepicker
 * Copyright (c) 2014 Marja Menge, Menge Webdesign, MIT License */
+
+/* v 1.1 beta 17 nov 2014
+ * cleanup placeholder code
+ * added trigger change
+ * no need to destroy anymore - just call again
+ * clearbutton resets time now too
+ * repaired wrong date display in case of min or max
+ * move focus from the input to the wrapper -> ie
+ * clone form attribute to the extra inputs
+ * added trigger change to the input on timeslider
+ * 
+ * v1.0 beta 20 aug 2014 
+*/
+
 (function ($) {
 
 	/*Do not redefine mwd_datepicker */
@@ -182,7 +196,6 @@
 			//set main vars					
 			var thisval = $(input).attr('value'),
 			disabled = $(input).attr('disabled'),
-			placeholder = $(input).attr('placeholder'),
 			mindate = $(input).datepicker('option', 'minDate'),
 			maxdate = $(input).datepicker('option', 'maxDate'),
 			mintime = $(input).datepicker('option', 'minTime'),
@@ -261,10 +274,13 @@
 			//timepicker init
 			if(dp == false && tp == true) {		
 				$(input).datepicker('option', 'dateFormat',  'dd-mm-yy');
-				if(thisval) {						
+				thistime = settime;		
+				if(thisval) {			
 					thisdate = $.datepicker.formatDate('dd-mm-yy', setdate, '');
 					thistime = thisval;	
 				}
+				var thismintime = mintime,
+				thismaxtime = maxtime;
 				$(input).datepicker('setDate', setdate); 
 				$(input).datepicker('option', 'orientation', 'horizontal');
 				$(input).datepicker('option', 'timeSeperator', '_____');
@@ -409,8 +425,8 @@
 				dateobject = get_thisdate['dateobject'];
 				datestring = String(get_thisdate['datestring']);
 			}
-			this.$input.datepicker('setDate', dateobject); 
-			
+			//alert(dateobject + ' ' + datestring);
+			//this.$input.datepicker('setDate', dateobject); 
 			
 			var timezonelist = '',
 			timeopts = '',
@@ -450,35 +466,28 @@
 			}
 			$(hiddenid_date).val(datestring);	
 			$(hiddenid_time).val(timestring + timezonelabel);	
-			$(dateid).val(dateshow);
+			$(dateid).val(dateshow).trigger('change');
 
-			var placeholder = this.$input.attr('placeholder'),
-			placeholderid = '#mwd_placeholder_' + thisid;
-			
-			if(placeholder) { 
-				$(placeholderid).html(''); 
-				if($(dateid).val() == '') { $(placeholderid).html(placeholder); }	
-			}
-
+			this.$input.datepicker('setDate', dateobject); 
 		},
 				
-		_addClearBtn: function(input) {  
+		_addClearBtn: function(input, dp_inst) {  
 			var required = $(input).attr('required'),
 			clearbtn = $(input).datepicker('option', 'clearBtn'),
 			buttondisplay = '';
+			var mwddp_inst = $.datepicker._get(dp_inst, 'mwd_datepicker');
 			if(required || clearbtn == false) { buttondisplay = 'display: none;'; }
 			var buttonPane = $(input).datepicker('widget').find('.ui-datepicker-buttonpane');
 			var thisid = $(input).attr('id'),
 			btntxt = $(input).datepicker('option', 'clearBtnText'),
-			placeholder = $(input).attr('placeholder'),
 			btn = $('<button class="ui-datepicker-clear ui-state-default ui-priority-secondary ui-corner-all" type="button" style="' + buttondisplay + '">' + btntxt + '</button>')			
 			.unbind('click')
 			.bind('click', function () { 
-				$.datepicker._clearDate(input); 
-				$('#mwd_date_' + thisid).val(''); 
+				$('#mwd_date_' + thisid).val('').trigger('change'); 
 				$('#mwd_date_hidden_' + thisid).val(''); 			
-				$('#mwd_time_hidden_' + thisid).val(''); 					
-				if (placeholder) { $('#mwd_placeholder_' + thisid).html(placeholder); }
+				$('#mwd_time_hidden_' + thisid).val(''); 		
+				$(input).datepicker('setDate', new Date()); 
+				mwddp_inst._setSelectedDate(dp_inst, '');	
 			})
 			.appendTo(buttonPane); 	
 		},
@@ -640,7 +649,7 @@
 							$(dateid).val(thisdate + timesep + hours + ':' + minutes + timezonecurrent);
 						}
 						$('#mwd_time_current_' + thisid).val(hours + ':' + minutes);	
-						$('#mwd_placeholder_' + thisid).html('');	
+						$(dateid).trigger('change');
 			        }
 			    });		
 				
@@ -666,7 +675,6 @@
 						$(dateid).val(thisdate + timesep + hours + ':' + minutes + timezonecurrent);
 					}
 					$('#mwd_time_current_' + thisid).val(hours + ':' + minutes);	
-					$('#mwd_placeholder_' + thisid).html('');	
 					$(hiddenid_time).val(hours + ':' + minutes + timezonecurrent);
 				});
 				
@@ -789,8 +797,11 @@
 						$(input).attr('id', input.id);
 					}
 					
-					//remove on destroy
-					$('#mwd_datepicker_' + thisid).remove();
+					//destroy on reinitiate
+					if($('#mwd_datepicker_' + thisid).length == 1) {
+						$(input).mwd_datepicker('destroy');
+						$('#mwd_datepicker_' + thisid).remove();
+					}
 					
 					//apply name
 					var thisname = $(input).attr('name'); 
@@ -815,11 +826,13 @@
 					thisdatetime = mwddp_inst._setInitDate(input, thisinst),
 					thisdate = thisdatetime['thisdate'],
 					thistime = thisdatetime['thistime'],
-					thisnamex = thisname + '[]';
+					thisnamex = thisname + '[]',
+					bntfrmid = $(input).attr('form');
 
 					//setup the input
 					$(input)
-					.attr('name', thisnamex)
+					//.attr('name', thisnamex)
+					.removeAttr('name')
 					.addClass('mwd_datepicker_input')
 					.after('<div  id="mwd_datepicker_' + thisid + '" class="mwd_datepicker">'
 					+ '<input  id="mwd_date_' + thisid + '" name="' + thisnamex + '" type="text" class="mwd_datepicker_value" value="' + thisval + '" readonly>'
@@ -827,24 +840,35 @@
 					+ '<input  id="mwd_time_hidden_' + thisid + '" name="' + thisnamex + '" type="hidden" value="' + thistime + '">'
 					+ '<div class="mwd-ui-datepicker" style=\"display: none;\"></div>'
 					+ '</div>')
-					.css({width: '1px', overflow: 'hidden', outline: 'none', border: 0, padding: 0, margin: 0});					
+					.css({width: '1px', overflow: 'hidden', outline: 'none', border: 0, padding: 0, margin: 0, color: 'transparent'});					
 					if(placeholder) { $('#mwd_date_' + thisid).attr('placeholder', placeholder); }	
 					if(disabled) { 
 						$('#mwd_date_' + thisid).attr('disabled', 'disabled'); 
 						$('#mwd_date_hidden_' + thisid).attr('disabled', 'disabled'); 
 						$('#mwd_time_hidden_' + thisid).attr('disabled', 'disabled'); 
-					}			
+					}							
+					if(bntfrmid) { 
+						$('#mwd_date_' + thisid).attr('form', bntfrmid);
+						$('#mwd_date_hidden_' + thisid).attr('form', bntfrmid);
+						$('#mwd_time_hidden_' + thisid).attr('form', bntfrmid);
+					}	
 
 					//initiate the values
 					mwddp_inst._setSelectedDate(thisinst, thisval);	
 
 					//trigger the input
-					$('#mwd_date_' + thisid).add('#mwd_placeholder_' + thisid).click(function() {
+					$('#mwd_date_' + thisid).click(function() {
 						$(input).trigger('focus'); 
 					});
 					if($(input).attr('autofocus')) {
 						$(input).trigger('focus'); 
 					}		
+					$(input).focus(function(e){	
+						//$('#mwd_datepicker_' + thisid).focus();
+						//e.preventDefault();
+						$(this).blur();
+						//$('#mwd_datepicker_' + thisid).focus();
+					}); 
 					
 				});
 			}
@@ -880,10 +904,10 @@
 			}
 			if (typeof(inst.stay_open) !== 'boolean' || inst.stay_open === false) {
 				this._base_updateDatepicker_mwddp(inst);		
-				vis = $(input).datepicker( "widget" ).is(":visible");
+				vis = $(input).datepicker('widget').is(':visible');
 				if(vis == true) {					
 					mwddp_inst._addTimepicker(input, inst);	
-					mwddp_inst._addClearBtn(input);
+					mwddp_inst._addClearBtn(input, inst);
 					mwddp_inst._setTheCss(input);
 				}
 			}
@@ -1057,4 +1081,3 @@
 	$.mwd_datepicker.version = "@@version";
 
 })(jQuery);
-
