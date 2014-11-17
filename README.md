@@ -14,6 +14,8 @@ Dependencies
 - jquery-ui: datepicker and slider widget
 - mwd_datepicker
 
-Documentation: http://www.mwd-form-elements.com/datetime/#!/getting-started/download/mwd_datepicker
+Documentation: 
+http://www.mwd-form-elements.com/datetime/#!/getting-started/download/mwd_datepicker
+http://marja-menge.github.io/mwd_datepicker/
 
 Version 1.1 beta
